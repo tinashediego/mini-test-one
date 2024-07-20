@@ -1,20 +1,20 @@
 import React, {useState,useEffect} from 'react'
 import { useRouter } from "next/router";
-import axios from 'axios';
+import axiosInstance from '@/app/axios';
 
 const DetailPage = () => {
   const router = useRouter();
-  const id = router.query.id
+  const listingId = router.query.listingId
   const [data, setData] = useState({})
 
   const getAboutData = async () => {
-  const res = await axios.get(`http://localhost:8000/api/v1/blog/${id}/`);
+  const res = await axiosInstance.get(`properties/details/${listingId}`);
     setData(res.data);  
   }
 
   useEffect(() => {
     getAboutData()
-  },[id]);
+  },[listingId]);
 
 
 return(
